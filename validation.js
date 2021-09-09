@@ -18,13 +18,23 @@ exports.validateClientConfiguration = (client) => {
   if (!client) {
     throw validationError(
       "The client config has not been configured correctly.",
-      401,
+      400,
     )
   }
   const params = ["port", "host", "authMethod", "auth"]
-  params.forEach((param) => {
-    if (!client[param]) throw validationError(`The client config is missing the "${param}" parameter.`)
-  })
+  let errors = params.reduce((accumulator, param) => {
+    if (!client[param]) {
+      accumulator.push(param)
+    }
+    return accumulator
+  }, [])
+
+  if (errors.length > 0) {
+    throw validationError(
+      `The client config missing "${errors.join(", ")}" parameter(s).`,
+      400,
+    )
+  }
 }
 
 /**
