@@ -20,7 +20,7 @@ See the [HTTP functions tutorial][tutorial].
 
 1. Read and follow the [prerequisites](../../#how-to-run-the-tests).
 
-1. Install dependencies:
+1. Install dependencies using Node 14:
 
         npm install
 
